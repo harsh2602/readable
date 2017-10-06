@@ -1,37 +1,34 @@
-import * as Types from '../actions/actionTypes'
+import * as Types from '../actions/actionTypes';
 
-function comments(state={}, action) {
-  const { comments, commentId, parentId, updatedComment} = action
-  switch(action.type) {
+function comments(state = {}, action) {
+  const { comments, commentId, parentId, updatedComment } = action;
+  switch (action.type) {
     case Types.FETCH_COMMENTS:
-      return Object.assign({}, state, {[parentId]: comments})
+      return { ...state, [parentId]: comments };
     case Types.VOTE_COMMENT:
       return {
         ...state,
-        [parentId]: state[parentId].map(comment => {
-          if(comment.id === commentId) {
-            comment = updatedComment
-          }
-          return comment
-        })
-      }
+        [parentId]: state[parentId]
+          .filter(v => v.id !== commentId)
+          .concat([updatedComment])
+      };
     case Types.UPDATE_COMMENT:
       return {
         ...state,
         [parentId]: state[parentId].map(comment => {
-          if(comment.id === commentId) {
-            comment = updatedComment
+          if (comment.id === commentId) {
+            comment = updatedComment;
           }
-          return comment
+          return comment;
         })
-      }
+      };
     case Types.ADD_COMMENT:
-      return Object.assign({}, state, {[parentId]: comments})
+      return Object.assign({}, state, { [parentId]: comments });
     case Types.DELETE_COMMENT:
-      return state
+      return state;
     default:
-    return state
+      return state;
   }
 }
 
-export default comments
+export default comments;

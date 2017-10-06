@@ -29,8 +29,8 @@ class Index extends Component {
       <div className="App">
         <div className="nav-header">
           <Link className="home" to="/">
-            <nav class="navbar navbar-default">
-              <div class="navbar-header">
+            <nav className="navbar navbar-default">
+              <div className="navbar-header">
                 <h1>READABLE</h1>
               </div>
             </nav>

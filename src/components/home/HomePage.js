@@ -20,7 +20,7 @@ class HomePage extends Component {
 }
 
 function mapStateToProps({ posts }, { match }) {
-  const category = match.params.category;
+  const { category } = match.params;
   return {
     posts: category ? posts.filter(post => post.category === category) : posts
   };
